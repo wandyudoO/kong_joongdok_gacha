@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 플레이어</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        /* 상단 탭 스타일 */
+        .tab-container {
+            display: flex;
+            background-color: #333;
+            overflow-x: auto;
+        }
+        .tab-button {
+            padding: 14px 20px;
+            color: white;
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .tab-button:hover {
+            background-color: #555;
+        }
+        .tab-button.active {
+            background-color: #04AA6D;
+            font-weight: bold;
+        }
+        /* 콘텐츠 실행 영역 (iframe) */
+        .content-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        /* 첫 화면 안내 문구 스타일 */
+        .welcome-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            z-index: 10;
+        }
+        .welcome-message h1 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        .welcome-message p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        /* 링크 스타일 지정 */
+        .welcome-message a {
+            color: #04AA6D;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .welcome-message a:hover {
+            text-decoration: underline;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 탭 버튼 영역 -->
+    <div class="tab-container">
+        <button class="tab-button" onclick="loadPage('1_쁘띠_패왕.html', this)">쁘띠패왕</button>
+        <button class="tab-button" onclick="loadPage('2_쁘띠_구마.html', this)">쁘띠구마</button>
+        <button class="tab-button" onclick="loadPage('3_쁘띠_중독.html', this)">쁘띠중독</button>
+        <button class="tab-button" onclick="loadPage('4_쭝이독이.html', this)">쭝이독이</button>
+        <button class="tab-button" onclick="loadPage('5_폴더_중독.html', this)">폴더중독</button>
+        <button class="tab-button" onclick="loadPage('6_독서하는_쭝독.html', this)">독서하는쭝독</button>
+        <button class="tab-button" onclick="loadPage('7_만두_중독.html', this)">만두중독</button>
+    </div>
+
+    <!-- 실행 화면 전체 감싸는 영역 -->
+    <div class="content-container">
+        <!-- 첫 화면 안내 문구 박스 -->
+        <div id="welcomeBox" class="welcome-message">
+            <h1>🎮 콩알쭝이독이 가챠랜드에 오신것을 환영합니다!</h1>
+            <p>상단의 탭을 클릭하면 해당 가챠 바로 플레이할 수 있습니다.</p>
+            <p>
+                <a href="https://x.com/_0303_S2/status/2093175035313918262" target="_blank">X:@_0303_S2</a> 
+                님의 온라인 가챠 메이커를 활용하여 만들어진 파일입니다.
+            </p>
+            <p>©2026. MONGNYA. all rights reserved.</p>
+        </div>
+
+        <!-- 게임 실행 영역 -->
+        <iframe id="gameFrame" src=""></iframe>
+    </div>
+
+    <script>
+        function loadPage(pageUrl, button) {
+            // 1. 안내 화면 숨기기
+            const welcomeBox = document.getElementById('welcomeBox');
+            if (welcomeBox) {
+                welcomeBox.style.display = 'none';
+            }
+
+            // 2. iframe에 클릭한 게임 파일 연결하기
+            document.getElementById('gameFrame').src = pageUrl;
+
+            // 3. 버튼 활성화 표시 바꾸기
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
